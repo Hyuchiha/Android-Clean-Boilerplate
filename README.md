@@ -11,11 +11,12 @@ To see a sample app using Clean Architecture you can look [here].
 ## Libraries included
 
  - [Android Support Library] for backwards compatibility.
- - [Timber] for logging.
+ - [Logger] for logging.
  - [Butterknife] for view injection.
  - [Retrofit] for network code.
  - [JUnit] and [Mockito] for testing.
  - [Findbugs] for finding bugs, *duh*.
+ - [ORMLite] for database.
 
 # Things to change
 
@@ -293,7 +294,8 @@ As far as our `WelcomingInteractor` is concerned, the lag might be because of th
 [here]: <https://github.com/dmilicic/android-clean-sample-app>
 [How to]: <https://stackoverflow.com/questions/16804093/android-studio-rename-package>
 [Butterknife]: <https://github.com/JakeWharton/butterknife>
-[Timber]: <https://github.com/JakeWharton/timber>
+[Logger]: <https://github.com/orhanobut/logger>
+[ORMLite]: <https://github.com/j256/ormlite-android>
 [Android Support Library]: <https://developer.android.com/tools/support-library/index.html>
 [JUnit]: <https://github.com/junit-team/junit/wiki/Download-and-Install>
 [Mockito]: <http://site.mockito.org/>
