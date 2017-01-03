@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.kodelabs.boilerplate.R;
@@ -24,6 +26,9 @@ public class MainActivity extends AppCompatActivity implements View {
     @BindView(R.id.nav_view)
     NavigationView mNavigationView;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     FirstFragment firstFragment = new FirstFragment();
     SecondFragment secondFragment = new SecondFragment();
 
@@ -36,6 +41,14 @@ public class MainActivity extends AppCompatActivity implements View {
     }
 
     private void uiSetup() {
+        // toolbar
+        setSupportActionBar(toolbar);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        }
+
         // first fragment
         replaceFragment(firstFragment);
 
@@ -52,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements View {
                 });
     }
 
-    private void selectNavItem(MenuItem item){
-        switch (item.getItemId()){
+    private void selectNavItem(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.nav_item_first:
                 replaceFragment(firstFragment);
                 break;
@@ -65,11 +78,27 @@ public class MainActivity extends AppCompatActivity implements View {
         }
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container,fragment)
+                .replace(R.id.fragment_container, fragment)
                 .commit();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                } else {
+                    mDrawerLayout.openDrawer(GravityCompat.START);
+                }
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     @Override
