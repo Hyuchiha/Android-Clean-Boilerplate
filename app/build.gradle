@@ -55,11 +55,13 @@ dependencies {
 
     //Dependency injection
     compile "com.google.dagger:dagger-android:$rootProject.ext.daggerVersion"
-    compile "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion" // if you use the support libraries
+    compile "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
+    // if you use the support libraries
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
 
     // tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"
     testCompile "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
     testCompile "org.robolectric:robolectric:$rootProject.ext.roboelectricVersion"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
