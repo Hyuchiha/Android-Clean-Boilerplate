@@ -39,6 +39,7 @@ dependencies {
     compile "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintVersion"
     compile "de.hdodenhof:circleimageview:$rootProject.ext.circleimageVersion"
     compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    compile "org.ocpsoft.prettytime:prettytime:$rootProject.ext.PrettyTimeVersion"
 
     // database
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:$rootProject.ext.dbflowVersion"

@@ -1,4 +1,4 @@
-package com.kodelabs.boilerplate.domain.db;
+package com.kodelabs.boilerplate.data.db;
 
 import com.raizlabs.android.dbflow.annotation.Database;
 
