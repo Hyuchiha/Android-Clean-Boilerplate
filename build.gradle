@@ -6,6 +6,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -15,9 +16,33 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    minSdkVersion = 16
+    targetSdkVersion = 24
+    compileSdkVersion = 24
+    buildToolsVersion = '25.0.0'
+
+    supportLibraryVersion = '25.3.1'
+
+    constraintVersion = '1.0.1'
+    retrofitVersion = '2.1.0'
+    logger = '1.15'
+    dbflowVersion = '4.0.1'
+    butterknifeVersion = '8.5.1'
+    eventbusVersion = '3.0.0'
+    daggerVersion = '2.11-rc2'
+    glideVersion = '3.7.0'
+    circleimageVersion = '2.1.0'
+
+    roboelectricVersion = '3.3.2'
+    mockitoVersion = '2.+'
+    junitVersion = '4.12'
 }
