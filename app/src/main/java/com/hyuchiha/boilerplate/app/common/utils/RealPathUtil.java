@@ -13,7 +13,12 @@ import android.support.v4.content.CursorLoader;
 
 import com.hyuchiha.boilerplate.app.common.exceptions.NoneExistingPathFromFile;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Author is https://gist.github.com/tatocaster/32aad15f6e0c50311626.
@@ -145,6 +150,10 @@ public class RealPathUtil {
             if (isGooglePhotosUri(uri))
                 return uri.getLastPathSegment();
 
+            if(isNewGooglePhotosUri(uri)){
+                return getImagePathFromInputStreamUri(context, uri);
+            }
+
             return getDataColumn(context, uri, null, null);
         }
         // File
@@ -221,8 +230,65 @@ public class RealPathUtil {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
 
+    public static boolean isNewGooglePhotosUri(Uri uri) {
+        return "com.google.android.apps.photos.contentprovider".equals(uri.getAuthority());
+    }
+
     public static boolean isGoogleDocsUri(Uri uri) {
         return "com.google.android.apps.docs.storage".equals(uri.getAuthority());
     }
 
+    public static String getImagePathFromInputStreamUri(Context context, Uri uri) {
+        InputStream inputStream = null;
+        String filePath = null;
+
+        if (uri.getAuthority() != null) {
+            try {
+                inputStream = context.getContentResolver().openInputStream(uri); // context needed
+                File photoFile = createTemporalFileFrom(context,inputStream);
+
+                filePath = photoFile.getPath();
+
+            } catch (IOException e) {
+                // log
+            }finally {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return filePath;
+    }
+
+    private static File createTemporalFileFrom(Context context,InputStream inputStream) throws IOException {
+        File targetFile = null;
+
+        if (inputStream != null) {
+            int read;
+            byte[] buffer = new byte[8 * 1024];
+
+            targetFile = createTemporalFile(context);
+            OutputStream outputStream = new FileOutputStream(targetFile);
+
+            while ((read = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, read);
+            }
+            outputStream.flush();
+
+            try {
+                outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return targetFile;
+    }
+
+    private static File createTemporalFile(Context context) {
+        return new File(context.getExternalCacheDir(), "tempFile.jpg"); // context needed
+    }
 }

@@ -8,11 +8,13 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.kodelabs.boilerplate"
+        vectorDrawables.useSupportLibrary = true
+        applicationId "com.hyuchiha.boilerplate"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -20,15 +22,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    applicationVariants.all { variant ->
+        variant.resValue "string", "app_version", variant.versionName
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
+    //Guava utils lib
+    compile "com.google.guava:guava:$rootProject.ext.guavaVersion-android"
+    annotationProcessor "com.google.guava:guava:$rootProject.ext.guavaVersion"
+
     // general
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:multidex:$rootProject.ext.multidexVersion"
     compile "com.orhanobut:logger:$rootProject.ext.logger"
+
+    // Injection
     compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
 
@@ -38,13 +50,19 @@ dependencies {
     compile "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintVersion"
     compile "de.hdodenhof:circleimageview:$rootProject.ext.circleimageVersion"
-    compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
     compile "org.ocpsoft.prettytime:prettytime:$rootProject.ext.PrettyTimeVersion"
+
+    //Glide
+    compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glideVersion"
 
     // database
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:$rootProject.ext.dbflowVersion"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:$rootProject.ext.dbflowVersion"
     compile "com.github.Raizlabs.DBFlow:dbflow:$rootProject.ext.dbflowVersion"
+
+    //Image picker
+    compile "com.github.Mariovc:ImagePicker:$rootProject.ext.imagePickerVersion"
 
     // network
     compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
@@ -55,13 +73,12 @@ dependencies {
 
     //Dependency injection
     compile "com.google.dagger:dagger-android:$rootProject.ext.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.ext.daggerVersion"
     compile "com.google.dagger:dagger-android-support:$rootProject.ext.daggerVersion"
-    // if you use the support libraries
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.ext.daggerVersion"
 
     // tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"
     testCompile "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
     testCompile "org.robolectric:robolectric:$rootProject.ext.roboelectricVersion"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }

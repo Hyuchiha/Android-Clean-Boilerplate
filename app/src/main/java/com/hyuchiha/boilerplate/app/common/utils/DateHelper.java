@@ -20,7 +20,7 @@ import java.util.TimeZone;
 public class DateHelper {
 
     ///Date patterns.
-    private static final String SERVER_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    private static final String SERVER_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZZ";
     private static final String LOCATION_HISTORY_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static final String HOURS_MINUTES_SECONDS_FORMAT = "HH:mm";
     private static final String DAY_AND_MONTH_FORMAT = "dd/MM";

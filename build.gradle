@@ -3,9 +3,17 @@
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        maven {
+            url 'https://maven.fabric.io/public'
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -17,6 +25,10 @@ allprojects {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
 }
 
@@ -25,21 +37,25 @@ task clean(type: Delete) {
 }
 
 ext {
-    minSdkVersion = 16
-    targetSdkVersion = 24
-    compileSdkVersion = 24
-    buildToolsVersion = '25.0.0'
+    minSdkVersion = 19
+    targetSdkVersion = 27
+    compileSdkVersion = 27
 
-    supportLibraryVersion = '25.3.1'
+    buildToolsVersion = '27.0.0'
+    supportLibraryVersion = '27.0.2'
+    multidexVersion = '1.0.2'
+    guavaVersion = '23.0'
 
-    constraintVersion = '1.0.1'
+    imagePickerVersion = '1.2.0'
+
+    constraintVersion = '1.0.2'
     retrofitVersion = '2.1.0'
     logger = '1.15'
-    dbflowVersion = '4.0.1'
-    butterknifeVersion = '8.5.1'
+    dbflowVersion = '4.1.2'
+    butterknifeVersion = '8.6.0'
     eventbusVersion = '3.0.0'
-    daggerVersion = '2.11-rc2'
-    glideVersion = '3.7.0'
+    daggerVersion = '2.11'
+    glideVersion = '4.2.0'
     PrettyTimeVersion = '3.1.0.Final'
     circleimageVersion = '2.1.0'
 

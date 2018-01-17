@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.hyuchiha.boilerplate.lib.base.ImageLoader;
 
 /**
@@ -20,18 +21,21 @@ public class GlideImageLoader implements ImageLoader {
 
     @Override
     public void load(ImageView imageView, String URL) {
+        RequestOptions requestOptions = new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop();
+
         if (onFinishedLoadingListener != null) {
+
             glideRequestManager
                     .load(URL)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .centerCrop()
+                    .apply(requestOptions)
                     .listener(onFinishedLoadingListener)
                     .into(imageView);
         } else {
             glideRequestManager
                     .load(URL)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .centerCrop()
+                    .apply(requestOptions)
                     .into(imageView);
         }
     }

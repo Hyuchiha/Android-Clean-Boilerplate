@@ -2,7 +2,10 @@ package com.hyuchiha.boilerplate.app.common.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.os.Build;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -12,6 +15,10 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Locale;
 
